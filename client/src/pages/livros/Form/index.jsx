@@ -74,7 +74,7 @@ export function Form({ close, edit }) {
 
   return (
     <Container onSubmit={handleSubmit(submitForm)}>
-    { autores && autores.length != 0 ?
+    { autores ?
       <>
       <div className="header">
         { edit? <h3> Editar Livro </h3> : <h3> Adicionar Livro </h3> }
