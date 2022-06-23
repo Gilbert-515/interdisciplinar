@@ -9,4 +9,8 @@ export const Container = styled.div`
     background: rgba(255, 255, 255, 0.35);
   }
 
+  @media (min-width: 1600px) {
+    width: 4% ;
+  }
+
 `;
