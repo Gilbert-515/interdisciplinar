@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import axios from 'axios';
 import { Auth } from '~/auth';
 import { useForm } from 'react-hook-form';
 import { Form } from './styled';
@@ -10,12 +11,23 @@ export function Login () {
 
   const [errors, setErrors] = useState({ usuario: null, senha: null });
 
-  const formSubmit = (data) => {
-    if (data.usuario == 'teste123')
-      console.log(data.usuario);
-    else
-      setErrors({ senha: 'testando...'});
+  const formSubmit = async (data) => {
+   
+    const { data: response } = await axios.post('/api/auth', data);
+
+    if(response.length){
+
+      window.sessionStorage.setItem('authToken', response[0].session);
+
       setAuth(true);
+    }
+    else {
+      setErrors({
+        usuario: 'usuario pode estar incorreto',
+        senha: 'senha pode estar incorreta'
+      })
+    }
+
   };
   
   return (

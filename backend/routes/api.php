@@ -6,6 +6,7 @@ use App\Http\Controllers\LeitorController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\EmprestimoController;
 use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\AuthController;
 
 // rotas leitor
 
@@ -42,7 +43,7 @@ Route::post('devolver', [EmprestimoController::class, 'devolver']);
 Route::post('renovar', [EmprestimoController::class, 'renovar']);
 
 
-// rota de options
+// rotas de options
 
 Route::get('getAutores', [OptionsController::class, 'getAutores']);
 
@@ -51,3 +52,7 @@ Route::get('getEditoras', [OptionsController::class, 'getEditoras']);
 Route::get('getLivros', [OptionsController::class, 'getLivros']);
 
 Route::get('getLeitores', [OptionsController::class, 'getLeitores']);
+
+// rota de auth
+
+Route::post('auth', [AuthController::class, 'login']);
