@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { RiLogoutBoxFill } from 'react-icons/ri';
 import { ProSidebar, Menu, MenuItem, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import { EmprestimoIcon, LivroIcon, LeitorIcon, RelatorioIcon } from '~/assets/icons';
 import { Auth as authContext } from '~/auth';
@@ -8,9 +9,15 @@ import { Container } from './styled';
 import './custom.scss';
 
 export function SideBar ({ menuClose }) {
-  const [auth,] = useContext(authContext);
+  const [auth, setAuth] = useContext(authContext);
   const [page,] = useContext(PageContext);
 
+  const logout = () => { 
+    window.sessionStorage.setItem('authToken', null);
+    setAuth(false);
+    window.location.reload();
+  }
+  
   return (
     auth &&
       <Container>
@@ -68,7 +75,9 @@ export function SideBar ({ menuClose }) {
             } */}
           </SidebarContent>
           <SidebarFooter>
-
+              <Menu iconShape="square">
+                <MenuItem icon={ <RiLogoutBoxFill fontSize='3rem'/> } onClick={ logout } > Sair </MenuItem>
+              </Menu> 
           </SidebarFooter>
         </ProSidebar>
       </Container>
