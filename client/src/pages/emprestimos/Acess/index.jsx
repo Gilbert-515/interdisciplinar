@@ -88,6 +88,7 @@ export function Acess ({ codigo, close }) {
         }/>
 
         <div className="footer">
+          { emprestimo.situacao == 'fechado' && <div></div> }
           <div className="btn">
             <Button color='var(--blue)' color_action='var(--blue_active)' onClick={ () => setComponent(2)}>
               <FaEdit/> Editar
