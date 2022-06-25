@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import { PageContext } from '~/App';
 import { Auth as authContext } from '~/auth';
 import { Login, Emprestimos } from '~/pages';
@@ -11,11 +12,19 @@ export function Home () {
 
   const [loading, setLoading] = useState(true);
 
-  const checkSession = async () => {
+  const checkSession = () => {
     const session = Number(sessionStorage.getItem('authToken'));
-    console.log(session);
-    session && setAuth(true);
-    setLoading(false);
+
+    axios.post('/api/verifySession', { token: session })
+    .then(({ data: response }) => {
+      const [data] = response; 
+      data.session && setAuth(true);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.log('erro session: ' + err);
+      setLoading(false);
+    });
   }
 
   useEffect(() => {

@@ -56,3 +56,7 @@ Route::get('getLeitores', [OptionsController::class, 'getLeitores']);
 // rota de auth
 
 Route::post('auth', [AuthController::class, 'login']);
+
+Route::post('verifySession', [AuthController::class, 'verifySession']);
+
+Route::post('logout', [AuthController::class, 'logout']);

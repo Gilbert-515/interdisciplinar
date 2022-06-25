@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { RiLogoutBoxFill } from 'react-icons/ri';
 import { ProSidebar, Menu, MenuItem, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import { EmprestimoIcon, LivroIcon, LeitorIcon, RelatorioIcon } from '~/assets/icons';
@@ -9,13 +10,16 @@ import { Container } from './styled';
 import './custom.scss';
 
 export function SideBar ({ menuClose }) {
+
+  const navigate = useNavigate();
+
   const [auth, setAuth] = useContext(authContext);
   const [page,] = useContext(PageContext);
 
-  const logout = () => { 
-    window.sessionStorage.setItem('authToken', null);
+  const logout = async () => { 
+    await axios.post('/api/logout');
     setAuth(false);
-    window.location.reload();
+    navigate('/');
   }
   
   return (
