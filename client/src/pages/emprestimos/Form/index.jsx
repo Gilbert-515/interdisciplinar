@@ -23,6 +23,9 @@ export function Form ({ close, edit }) {
     const [leitor_error, setLeitor_error] = useState();
     const [livro_error, setLivro_error] = useState();
 
+    const date = new Date();
+    date.setDate(date.getDate() + 30);
+
     const getOptions = async () => {
 
         const { data: livros_options } = await axios.get('/api/getLivros');
@@ -116,7 +119,10 @@ export function Form ({ close, edit }) {
                     type='date' 
                     name='data_devolucao' 
                     register={ register }
-                    value={ edit && edit.data_prevista_devolucao.split('/').reverse().join('-') }
+                    value={ edit ? 
+                        (edit.data_prevista_devolucao.split('/').reverse().join('-')) :
+                        ( date?.toLocaleDateString("pt-BR").split('/').reverse().join('-'))
+                    }
                     required/>
                 </div>
             </div>
