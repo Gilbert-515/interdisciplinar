@@ -89,8 +89,13 @@ export const Container = styled.div`
       margin: 1rem 0;
     }
 
+    .footer {
+      flex-wrap: wrap-reverse;
+    }
+
     .footer .btn {
       width: 100%;
+      margin: 1rem 0;
     }
   }
 `;
