@@ -60,4 +60,22 @@ export const Container = styled.div`
       }
   }
 
+  @media (max-width: 500px) {
+    overflow: auto;
+
+    table {
+
+      .acesso {
+      padding: 0 1rem;
+      max-width: 6.5rem ;
+      }
+
+      td, th {
+        padding: 1rem ;
+      }
+      
+    }
+    
+  }
+
 `;

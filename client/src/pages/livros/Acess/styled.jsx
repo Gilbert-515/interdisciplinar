@@ -83,4 +83,18 @@ export const Container = styled.div`
     }
   }
 
+  @media (max-width: 500px) {  
+    margin-top: 1.5rem;
+    padding: 1.9rem 1.25rem;
+
+    .footer {
+      flex-direction: column;
+      margin-top: 2rem;
+
+      span {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
 `;

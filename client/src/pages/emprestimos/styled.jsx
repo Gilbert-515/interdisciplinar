@@ -27,4 +27,22 @@ export const Container = styled.div`
     }
   }
 
+  @media (max-width: 500px) { 
+
+    .filterGroup {
+      .inputGroup {
+        width: 100%;
+        margin: 1rem 0;
+
+        .input {
+          width: 100%;
+          margin: 1rem 0;
+        }
+        .select {
+          width: 100%;
+        }
+      }
+    }
+  }
+
 `;

@@ -9,14 +9,15 @@ export const PageContext = createContext();
 function App() {
 
   const [page, setPage] = useState(1);
+  const [menu, setMenu] = useState(true);
 
   return (
     <PageContext.Provider value={[ page, setPage ]}>
       <AuthContext>
         <Router>
-        <SideBar/>
+          <Header openMenu={ () => setMenu(!menu) }/>
           <div className='body'>
-            <Header/>
+            <SideBar menuClose={ menu }/>
             <div className="main">
               <Routes>
                 <Route path='/' element={ <Home/> }/>

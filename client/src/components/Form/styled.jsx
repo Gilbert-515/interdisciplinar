@@ -114,4 +114,42 @@ export const Container = styled.form`
         justify-content: space-between;
         align-items: flex-end;
     }
+
+    @media (max-width: 500px) { 
+        margin-top: 1.5rem;
+        padding: 1.9rem 1.25rem;
+
+        .row {
+            .content {
+                width: 100%;
+                margin: 1rem 0;
+            }
+        }
+
+        .input-content {
+            width: 100%;
+        }
+
+        .btn-add { 
+            width: 100%;
+            height: 35%;
+        }
+
+        .items-adds {
+            width: 100%;
+
+            .item {
+                margin-top: .5rem;
+                flex-wrap: wrap;
+            }
+
+            .btn-trash { 
+                width: 100%;
+            }
+        }
+
+        .footer .btn {
+            width: 100%;
+        }
+    }
 `;

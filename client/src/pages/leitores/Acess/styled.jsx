@@ -58,4 +58,16 @@ export const Container = styled.div`
       margin-right:0;
     }
   }
+
+  @media (max-width: 500px) { 
+    margin-top: 1.5rem;
+    padding: 1.9rem 1.25rem;
+
+    .row .content {
+      width: 100%;
+    }
+    .footer .btn {
+      width: 100%;
+    }
+  }
 `;
