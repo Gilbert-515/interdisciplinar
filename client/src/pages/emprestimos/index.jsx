@@ -9,10 +9,11 @@ import { Acess } from './Acess';
 
 export function Emprestimos () {
 
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm();
   const [component, setComponent] = useState(1);
   const [acess, setAcess] = useState();
   const [emprestimos, setEmprestimos] = useState();
+  const [placeholderFilter, setPlaceolderFilter] = useState('Quem você procura?');
 
   const acessPage = (codigo) => {
     setAcess(codigo);
@@ -31,6 +32,30 @@ export function Emprestimos () {
     setEmprestimos(data);
   }
 
+  async function getFilter(infos) {
+
+    if(infos.filtroTipo == 'Leitor') {
+      const { data } = await axios.post('/api/filtroEmprestimo', {
+        filtro: infos.filtroTipo,
+        nome: infos.filtro
+      })
+      setEmprestimos(data);
+    }
+    else {
+      const { data } = await axios.post('/api/filtroEmprestimo', {
+        filtro: infos.filtroTipo,
+        codigo: infos.filtro
+      })
+      setEmprestimos(data);
+    }
+  }
+
+  const alterFilter = () => {
+    placeholderFilter == 'Quem você procura?' ?
+    setPlaceolderFilter('Informe o código do empréstimo') :
+    setPlaceolderFilter('Quem você procura?');
+  }
+
   useEffect(() => {
     getEmprestimos();
   }, [component])
@@ -42,10 +67,10 @@ export function Emprestimos () {
         <div className='filterGroup'>
           <div className='inputGroup'>
             <div className="select">
-              <Select name='filtros' options={ ['Leitor', 'Código', 'Situação'] } register={ register }/>
+              <Select name='filtroTipo' options={ ['Leitor', 'Código'] } register={ register } onChange={ alterFilter }/>
             </div>
             <div className="input">
-              <Input name='filtro' placeholder='Quem você procura?' register={ register } icon={ FaSearch } />
+              <Input name='filtro' placeholder={ placeholderFilter } register={ register } icon={ FaSearch } handleSubmit={ handleSubmit(getFilter) } />
             </div>
         </div>
           <Button color='var(--success)' color_action='var(--success_active)' onClick={ e => setComponent(2) }>

@@ -16,13 +16,18 @@ export function Leitores () {
   const [auth,] = useContext(authContext);
   const navigate = useNavigate();
 
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm();
   const [component, setComponent] = useState(1);
   const [acess, setAcess] = useState();
   const [leitores, setLeitores] = useState();
 
   async function getLeitores() {
     const { data } = await axios.get('/api/allLeitores');
+    setLeitores(data);
+  }
+
+  async function getFilter(infos) {
+    const { data } = await axios.post('/api/filtroLeitor', { nome: infos.filtro });
     setLeitores(data);
   }
 
@@ -44,7 +49,13 @@ export function Leitores () {
         <div className='filterGroup'>
           <div className='inputGroup'>
             <div className="input">
-              <Input name='filtro' placeholder='Quem você está procura?' register={ register } icon={ FaSearch } />
+              <Input 
+              name='filtro' 
+              placeholder='Quem você está procura?' 
+              register={ register } 
+              icon={ FaSearch } 
+              handleSubmit={ handleSubmit(getFilter) }
+              required/>
             </div>
         </div>
           <Button color='var(--success)' color_action='var(--success_active)' onClick={ e => setComponent(2) }>

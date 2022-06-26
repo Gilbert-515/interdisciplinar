@@ -16,14 +16,38 @@ export function Livros () {
   const [auth,] = useContext(authContext);
   const navigate = useNavigate();
 
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm();
   const [component, setComponent] = useState(1);
   const [acess, setAcess] = useState();
   const [books, setBooks] = useState();
+  const [placeholderFilter, setPlaceolderFilter] = useState('Informe o nome do livro');
 
   async function getBooks() {
     const { data } = await axios.get('/api/getAllLivros');
     setBooks(data);
+  }
+
+  async function getFilter(infos) {
+   if (infos.filtroTipo == 'Código'){
+    const { data } = await axios.post('/api/filtroLivro', { 
+      filtro : infos.filtroTipo,
+      codigo: infos.filtro
+    });
+    setBooks(data);
+   }
+   else {
+    const { data } = await axios.post('/api/filtroLivro', { 
+      filtro : infos.filtroTipo,
+      nome: infos.filtro
+    });
+    setBooks(data);
+   }
+  }
+
+  const alterFilter = () => {
+    placeholderFilter == 'Informe o nome do livro' ?
+    setPlaceolderFilter('Informe o código do livro') :
+    setPlaceolderFilter('Informe o nome do livro');
   }
 
   const acessPage = (codigo) => {
@@ -44,10 +68,11 @@ export function Livros () {
         <div className='filterGroup'>
           <div className='inputGroup'>
             <div className="select">
-              <Select name='filtros' options={ ['Nome', 'Código'] } register={ register }/>
+              <Select name='filtroTipo' options={ ['Nome', 'Código'] } register={ register } onChange={ alterFilter }/>
             </div>
             <div className="input">
-              <Input name='filtro' placeholder='Informe o nome do livro?' register={ register } icon={ FaSearch } />
+              <Input 
+              name='filtro' placeholder={ placeholderFilter } register={ register } icon={ FaSearch } handleSubmit={ handleSubmit(getFilter) } />
             </div>
           </div>
           <Button color='var(--success)' color_action='var(--success_active)' onClick={ e => setComponent(2) }>

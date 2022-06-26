@@ -7,6 +7,7 @@ use App\Http\Controllers\LivroController;
 use App\Http\Controllers\EmprestimoController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FiltroController;
 
 // rotas leitor
 
@@ -60,3 +61,12 @@ Route::post('auth', [AuthController::class, 'login']);
 Route::post('verifySession', [AuthController::class, 'verifySession']);
 
 Route::post('logout', [AuthController::class, 'logout']);
+
+
+// rota filtros
+
+Route::post('filtroLeitor', [FiltroController::class, 'leitor']);
+
+Route::post('filtroLivro', [FiltroController::class, 'livro']);
+
+Route::post('filtroEmprestimo', [FiltroController::class, 'emprestimo']);
