@@ -117,7 +117,7 @@ class LeitorController extends Controller
 
         return response()->json([
             "save" => true,
-            "message" => "leitor salvo com sucesso"
+            "infos" => $leitor
         ], 201);
     }
 }

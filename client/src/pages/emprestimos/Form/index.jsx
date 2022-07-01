@@ -69,7 +69,7 @@ export function Form ({ close, edit }) {
                 setLivro_error(response.livro_message);
             }
             else {
-                close();
+                close(response.infos.id);
             }
         }
         else {

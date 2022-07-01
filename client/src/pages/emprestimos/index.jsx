@@ -93,7 +93,17 @@ export function Emprestimos () {
         }
         </Container>
       }
-      { component == 2 && <Form close={ e => setComponent(1) }/> }
+      { component == 2 && <Form close={ codigo => {
+          if(codigo) {
+            setAcess(codigo);
+            setComponent(3);
+          }
+          else {
+            setComponent(1);
+          }
+        } 
+      }/> 
+      }
       { component == 3 && <Acess codigo={ acess } close={ e => setComponent(1) }/> }
     </>
     

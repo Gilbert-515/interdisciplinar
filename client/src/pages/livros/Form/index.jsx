@@ -57,7 +57,7 @@ export function Form({ close, edit }) {
       const { data } = await axios.post('/api/newLivro', infos);
       data.save == false ?
       setError(data.message) :
-      close();
+      close(data.id);
     }
     else {
       infos.codigo = edit.id;
@@ -78,7 +78,7 @@ export function Form({ close, edit }) {
       <>
       <div className="header">
         { edit? <h3> Editar Livro </h3> : <h3> Adicionar Livro </h3> }
-        <AiOutlineCloseSquare onClick={close} />
+        <AiOutlineCloseSquare onClick={ () => close() } />
       </div>
       <div className="row">
         <div className="content">

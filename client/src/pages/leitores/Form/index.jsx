@@ -21,15 +21,13 @@ export function Form ({ close, edit }) {
     if (edit) {
       infos.codigo = edit.id;
       const { data } = await axios.post('/api/editLeitor', infos);
-      console.log(data);
       close();
     }
     else {
       const { data } = await axios.post('/api/newleitor', infos);
-      console.log(data);
       data.save == false ?
       setErrors({ nome: data.message }) :
-      close();
+      close(data.infos.id);
     }
   }
 

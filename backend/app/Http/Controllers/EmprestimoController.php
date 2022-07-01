@@ -107,12 +107,15 @@ class EmprestimoController extends Controller
 
         }
 
+        $emprestimo_save;
+
         foreach($leitors as $leitor ) {
             $emprestimo = new Emprestimo;
             $emprestimo->leitor_id = $leitor->id;
             $emprestimo->data_emprestimo = date('Y-m-d H:i:s');
             $emprestimo->data_prevista_devolucao = $request->data_devolucao;
             $emprestimo->save();
+            $emprestimo_save = $emprestimo;
         }
 
         $livros_form = $request->livros;
@@ -135,6 +138,12 @@ class EmprestimoController extends Controller
             }
 
         }
+
+        return response()->json([
+            "save" => true,
+            "infos" => $emprestimo_save
+        ], 201);
+
     }
 
     public function getAllEmprestimos() {

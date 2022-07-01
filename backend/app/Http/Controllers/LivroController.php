@@ -76,7 +76,7 @@ class LivroController extends Controller
                 }
             }
         }
-        return response(json_encode($autores[0]), 201);
+        return response(json_encode($livro), 201);
     }
 
     public function getAllLivros() {
